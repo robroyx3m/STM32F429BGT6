@@ -5,8 +5,8 @@ description = "Device support crate for the STM32F249BGT6"
 documentation = "https://docs.rs/f3"
 keywords = ["arm", "cortex-m", "stm32"]
 license = "MIT OR Apache-2.0"
-name = "stm32_f249_bgt6"
-repository = "https://github.com/robroyx3m/stm32_f429_bgt6"
+name = "stm32-f429-bgt6"
+repository = "https://github.com/robroyx3m/stm32-f429-bgt6"
 version = "0.1.0"
 
 [dependencies]

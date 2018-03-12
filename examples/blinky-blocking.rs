@@ -6,9 +6,8 @@
 #![feature(proc_macro)]
 #![no_std]
 
-extern crate stm32_f429_bgt6 as f4;
-
 extern crate cortex_m_rtfm as rtfm;
+extern crate stm32_f429_bgt6 as f4;
 
 #[macro_use(block)]
 extern crate nb;

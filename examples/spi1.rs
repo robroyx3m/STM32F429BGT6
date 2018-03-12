@@ -15,7 +15,7 @@
 extern crate cortex_m;
 extern crate cortex_m_rtfm as rtfm;
 extern crate stm32_f429_bgt6 as f4;
-extern crate stm32f40x;
+extern crate stm32f429x as stm32f40x;
 
 use f4::Spi;
 use f4::prelude::*;
@@ -38,7 +38,7 @@ fn init(p: init::Peripherals) {
         // Set PA_8 and PA_9 as outputs
         p.GPIOA
             .moder
-            .modify(|_, w| w.moder8().bits(1).moder9().bits(1));
+            .modify(|_, w| unsafe { w.moder8().bits(1).moder9().bits(1) });
         // Use pull-ups
         p.GPIOA
             .pupdr
@@ -46,7 +46,7 @@ fn init(p: init::Peripherals) {
         // Highest output speed
         p.GPIOA
             .ospeedr
-            .modify(|_, w| w.ospeedr8().bits(3).ospeedr9().bits(3));
+            .modify(|_, w| unsafe { w.ospeedr8().bits(3).ospeedr9().bits(3) });
         // Default to high (CS disabled)
         p.GPIOA
             .odr

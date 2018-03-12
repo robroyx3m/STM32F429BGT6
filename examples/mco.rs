@@ -37,9 +37,13 @@ fn init(p: init::Peripherals, _r: init::Resources) {
 
     // Configure PA8 as MCO_1 alternate function to output HSI clock
     p.RCC.ahb1enr.modify(|_, w| w.gpioaen().set_bit()); //Enable GPIOA clock
-    p.GPIOA.ospeedr.modify(|_, w| w.ospeedr8().bits(0b11)); //Highest output speed
-    p.GPIOA.afrh.modify(|_, w| w.afrh8().bits(0)); //Alternate function AF0 MCO_1 on pin 8
-    p.GPIOA.moder.modify(|_, w| w.moder8().bits(0b10)); //Alternate function push-pull
+    p.GPIOA
+        .ospeedr
+        .modify(|_, w| unsafe { w.ospeedr8().bits(0b11) }); //Highest output speed
+    p.GPIOA.afrh.modify(|_, w| unsafe { w.afrh8().bits(0) }); //Alternate function AF0 MCO_1 on pin 8
+    p.GPIOA
+        .moder
+        .modify(|_, w| unsafe { w.moder8().bits(0b10) }); //Alternate function push-pull
     p.RCC.cfgr.modify(|_, w| unsafe { w.mco1().bits(0b00) }); //HSI clock selected
     p.RCC.cfgr.modify(|_, w| unsafe { w.mco1pre().bits(0) }); //No division
 

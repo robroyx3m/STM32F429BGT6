@@ -8,7 +8,7 @@ extern crate cortex_m;
 extern crate cortex_m_debug;
 extern crate cortex_m_rtfm as rtfm;
 extern crate stm32_f429_bgt6 as f4;
-extern crate stm32f40x;
+extern crate stm32f429x as stm32f40x;
 
 use core::mem::transmute;
 use f4::I2c;
