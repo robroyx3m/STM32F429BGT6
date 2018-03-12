@@ -34,15 +34,10 @@ rev = "7d904f515d15fd5fe7ea34e18820ea83e2651fa2"
 [dependencies.nb]
 git = "https://github.com/japaric/nb"
 
-[dependencies.stm32f40x]
-features = ["rt"]
-version = "0.2.0"
-git = "https://gitlab.henriktjader.com/pln/STM32F40x"
-
 [dependencies.stm32f429x]
 features = ["rt"]
 version = "0.1.0"
-git = "https://gitlab.henriktjader.com/pln/STM32F429x"
+git = "https://gitlab.henriktjader.com/pln/STM32F429x.git"
 
 [dev-dependencies]
 heapless = "0.2.0"
