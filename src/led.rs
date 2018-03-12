@@ -14,7 +14,7 @@ pub fn init(gpioa: &GPIOA, rcc: &RCC) {
     rcc.ahb1enr.modify(|_, w| w.gpioaen().set_bit());
 
     // configure PA5 as output
-    gpioa.moder.modify(|_, w| w.moder5().bits(1));
+    gpioa.moder.modify(|_, w| unsafe { w.moder5().bits(1) });
 }
 
 impl PA5 {

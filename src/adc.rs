@@ -115,13 +115,13 @@ impl<'a> Adc<'a> {
         // Set pins as analog input
         match input {
             AdcChannel::_0 => {
-                gpioa.afrl.modify(|_, w| w.afrl0().bits(0));
-                gpioa.moder.modify(|_, w| w.moder0().bits(0b11));
+                gpioa.afrl.modify(|_, w| unsafe { w.afrl0().bits(0) });
+                gpioa.moder.modify(|_, w| unsafe { w.moder0().bits(0b11) });
                 gpioa.pupdr.modify(|_, w| unsafe { w.pupdr0().bits(0b00) });
             }
             AdcChannel::_1 => {
-                gpioa.afrl.modify(|_, w| w.afrl1().bits(0));
-                gpioa.moder.modify(|_, w| w.moder1().bits(0b11));
+                gpioa.afrl.modify(|_, w| unsafe { w.afrl1().bits(0) });
+                gpioa.moder.modify(|_, w| unsafe { w.moder1().bits(0b11) });
                 gpioa.pupdr.modify(|_, w| unsafe { w.pupdr1().bits(0b00) });
             }
             // AdcChannel::_2 => {
@@ -131,23 +131,23 @@ impl<'a> Adc<'a> {
             //     unimplemented!();
             // }
             AdcChannel::_4 => {
-                gpioa.afrl.modify(|_, w| w.afrl4().bits(0));
-                gpioa.moder.modify(|_, w| w.moder4().bits(0b11));
+                gpioa.afrl.modify(|_, w| unsafe { w.afrl4().bits(0) });
+                gpioa.moder.modify(|_, w| unsafe { w.moder4().bits(0b11) });
                 gpioa.pupdr.modify(|_, w| unsafe { w.pupdr4().bits(0b00) });
             }
             AdcChannel::_5 => {
-                gpioa.afrl.modify(|_, w| w.afrl5().bits(0));
-                gpioa.moder.modify(|_, w| w.moder5().bits(0b11));
+                gpioa.afrl.modify(|_, w| unsafe { w.afrl5().bits(0) });
+                gpioa.moder.modify(|_, w| unsafe { w.moder5().bits(0b11) });
                 gpioa.pupdr.modify(|_, w| unsafe { w.pupdr5().bits(0b00) });
             }
             AdcChannel::_6 => {
-                gpioa.afrl.modify(|_, w| w.afrl6().bits(0));
-                gpioa.moder.modify(|_, w| w.moder6().bits(0b11));
+                gpioa.afrl.modify(|_, w| unsafe { w.afrl6().bits(0) });
+                gpioa.moder.modify(|_, w| unsafe { w.moder6().bits(0b11) });
                 gpioa.pupdr.modify(|_, w| unsafe { w.pupdr6().bits(0b00) });
             }
             AdcChannel::_7 => {
-                gpioa.afrl.modify(|_, w| w.afrl7().bits(0));
-                gpioa.moder.modify(|_, w| w.moder7().bits(0b11));
+                gpioa.afrl.modify(|_, w| unsafe { w.afrl7().bits(0) });
+                gpioa.moder.modify(|_, w| unsafe { w.moder7().bits(0b11) });
                 gpioa.pupdr.modify(|_, w| unsafe { w.pupdr7().bits(0b00) });
             }
             AdcChannel::_8 => unsafe {

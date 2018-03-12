@@ -18,8 +18,8 @@
 extern crate cast;
 extern crate cortex_m;
 extern crate cortex_m_rtfm as rtfm;
-extern crate f4;
 extern crate heapless;
+extern crate stm32_f429_bgt6 as f4;
 
 use cast::{usize, u8};
 use cortex_m::peripheral::SystClkSource;

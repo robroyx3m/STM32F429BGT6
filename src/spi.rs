@@ -42,7 +42,8 @@ pub enum Error {
     ModeFault,
     /// CRC error
     Crc,
-    #[doc(hidden)] _Extensible,
+    #[doc(hidden)]
+    _Extensible,
 }
 
 /// Serial Peripheral Interface
@@ -78,23 +79,23 @@ macro_rules! impl_Spi {
 
                     // DM00102166 - Alternate function AF5, Table 9
                     gpioa.afrl.modify(|_, w|
-                        w.afrl4().bits(5)
+                       unsafe{ w.afrl4().bits(5)
                         .afrl5().bits(5)
                         .afrl6().bits(5)
-                        .afrl7().bits(5));
+                        .afrl7().bits(5)});
                     // RM0368 8.3 Table 23
                     // Highest output speed
                     gpioa.ospeedr.modify(|_, w|
-                        w.ospeedr4().bits(0b11)
+                        unsafe{ w.ospeedr4().bits(0b11)
                         .ospeedr5().bits(0b11)
                         .ospeedr6().bits(0b11)
-                        .ospeedr7().bits(0b11));
+                        .ospeedr7().bits(0b11)});
                     // Alternate function mode
                     gpioa.moder.modify(|_, w|
-                        w.moder4().bits(2)
+                        unsafe{ w.moder4().bits(2)
                         .moder5().bits(2)
                         .moder6().bits(2)
-                        .moder7().bits(2));
+                        .moder7().bits(2)});
                     // Push pull, MISO open drain
                     gpioa.otyper.modify(|_, w|
                         w.ot4().clear_bit()
@@ -179,7 +180,7 @@ macro_rules! impl_Spi {
                     // MOSI = PB5 = Alternate function push pull
 
                     // DM00102166 - Alternate function AF6, Table 9
-                    gpioa.afrh.modify(|_, w| w.afrh15().bits(5));
+                    gpioa.afrh.modify(|_, w| unsafe{ w.afrh15().bits(5)});
                     gpiob.afrl.modify(|_, w| unsafe {
                         w.afrl3().bits(6)
                         .afrl4().bits(6)
@@ -187,14 +188,14 @@ macro_rules! impl_Spi {
                     });
                     // RM0368 8.3 Table 23
                     // Highest output speed
-                    gpioa.ospeedr.modify(|_, w| w.ospeedr15().bits(0b11));
+                    gpioa.ospeedr.modify(|_, w| unsafe{ w.ospeedr15().bits(0b11)});
                     gpiob.ospeedr.modify(|_, w| unsafe {
                         w.ospeedr3().bits(0b11)
                         .ospeedr4().bits(0b11)
                         .ospeedr5().bits(0b11)
                     });
                     // Alternate function mode
-                    gpioa.moder.modify(|_, w|  w.moder15().bits(2));
+                    gpioa.moder.modify(|_, w|  unsafe{ w.moder15().bits(2)});
                     gpiob.moder.modify(|_, w| unsafe {
                         w.moder3().bits(2)
                         .moder4().bits(2)

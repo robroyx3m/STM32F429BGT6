@@ -8,8 +8,8 @@ extern crate cortex_m;
 #[macro_use]
 extern crate cortex_m_debug;
 extern crate cortex_m_rtfm as rtfm;
-extern crate f4;
 extern crate nb;
+extern crate stm32_f429_bgt6 as f4;
 
 use f4::clock;
 use f4::time::Milliseconds;

@@ -32,7 +32,8 @@ pub enum Error {
     Timeout,
     /// Bus error
     BusError,
-    #[doc(hidden)] _Extensible,
+    #[doc(hidden)]
+    _Extensible,
 }
 
 /// Serial Peripheral Interface
@@ -115,14 +116,14 @@ macro_rules! impl_I2c {
                     rcc.apb1enr.modify(|_, w| w.i2c3en().set_bit());
                     rcc.ahb1enr.modify(|_, w| w.gpioaen().set_bit().gpioben().set_bit());
                     // DM00102166 - Alternate function, Table 9
-                    gpioa.afrh.modify(|_, w| w.afrh8().bits(4));
+                    gpioa.afrh.modify(|_, w| unsafe{ w.afrh8().bits(4)});
                     gpiob.afrl.modify(|_, w| unsafe {w.afrl4().bits(9)});
                     // RM0368 8.3 Table 23
                     // Highest output speed
-                    gpioa.ospeedr.modify(|_, w| w.ospeedr8().bits(0b11));
+                    gpioa.ospeedr.modify(|_, w| unsafe{ w.ospeedr8().bits(0b11)});
                     gpiob.ospeedr.modify(|_, w| unsafe {w.ospeedr4().bits(0b11)});
                     // Alternate function mode
-                    gpioa.moder.modify(|_, w| w.moder8().bits(2));
+                    gpioa.moder.modify(|_, w| unsafe{ w.moder8().bits(2)});
                     gpiob.moder.modify(|_, w| unsafe {w.moder4().bits(2)});
                     // Alternate function open drain
                     gpioa.otyper.modify(|_, w| w.ot8().set_bit());

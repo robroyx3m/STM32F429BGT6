@@ -24,7 +24,7 @@ extern crate embedded_hal as hal;
 extern crate m;
 extern crate nb;
 extern crate static_ref;
-pub extern crate stm32f40x;
+pub extern crate stm32f429x as stm32f40x;
 
 pub mod math_utils;
 pub mod dma;
