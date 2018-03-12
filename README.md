@@ -1,13 +1,14 @@
 [![Build status](https://travis-ci.org/jsjolund/f4.svg?branch=master)](https://travis-ci.org/jsjolund/f4)
 
-# `f4`
+# `STM32F429BGT6`
 
-> Board Support Crate for [NUCLEO-F411RE] and [NUCLEO-F401RE]
+> Device support crate [STM32F429BGT6]
 
-[NUCLEO-F401RE]: http://www.st.com/en/evaluation-tools/nucleo-f401re.html
-[NUCLEO-F411RE]: http://www.st.com/en/evaluation-tools/nucleo-f411re.html
+[STM32F429BGT6]: 
+http://www.st.com/content/ccc/resource/technical/document/reference_manual/3d/6d/5a/66/b4/99/40/d4/DM00031020.pdf/files/DM00031020.pdf/jcr:content/translations/en.DM00031020.pdf
 
 ## [Documentation](https://jsjolund.github.io/f4/f4/)
+### All examples might not work out of the box as this is a fork of the f4 crate, (board support crate for the NUCLEO-F411RE), located at https://github.com/jsjolund/f4
 
 ## License
 
