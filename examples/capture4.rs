@@ -9,19 +9,21 @@ extern crate cortex_m;
 extern crate cortex_m_debug;
 extern crate cortex_m_rtfm as rtfm;
 extern crate nb;
-extern crate stm32_f429_bgt6 as f4;
+extern crate stm32_f429_bgt6;
 
-use f4::clock;
-use f4::time::Milliseconds;
-use f4::{Capture, Channel};
-use f4::prelude::*;
+use stm32_f429_bgt6::clock;
+use stm32_f429_bgt6::time::Milliseconds;
+use stm32_f429_bgt6::{Capture, Channel};
+use stm32_f429_bgt6::prelude::*;
 use rtfm::{app, Threshold};
+
+use stm32_f429_bgt6::stm32f40x as stm32f429x; //VERY IMPORTANT! Always do this to clarify what the base device crate really is!
 
 const RESOLUTION: Milliseconds = Milliseconds(1);
 const CHANNELS: [Channel; 1] = [Channel::_1];
 
 app! {
-    device: f4::stm32f40x,
+    device: stm32f429x,
 
     idle: {
         resources: [TIM2],

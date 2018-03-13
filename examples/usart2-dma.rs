@@ -9,18 +9,20 @@
 extern crate cortex_m_rtfm as rtfm;
 extern crate heapless;
 #[macro_use]
-extern crate stm32_f429_bgt6 as f4;
+extern crate stm32_f429_bgt6;
 
 use core::fmt::Write;
 use core::ops::Deref;
-use f4::Serial;
-use f4::U8Writer;
-use f4::prelude::*;
-use f4::dma::{Buffer, Dma1Stream5, Dma1Stream6};
-use f4::time::Hertz;
-use f4::clock;
+use stm32_f429_bgt6::Serial;
+use stm32_f429_bgt6::U8Writer;
+use stm32_f429_bgt6::prelude::*;
+use stm32_f429_bgt6::dma::{Buffer, Dma1Stream5, Dma1Stream6};
+use stm32_f429_bgt6::time::Hertz;
+use stm32_f429_bgt6::clock;
 use heapless::Vec;
 use rtfm::{app, Threshold};
+
+use stm32_f429_bgt6::stm32f40x as stm32f429x; //VERY IMPORTANT! Always do this to clarify what the base device crate really is!
 
 // Max length of a command to be parsed.
 const MAX_CMD_LEN: usize = 10;
@@ -38,7 +40,7 @@ enum CmdType {
 }
 
 app! {
-    device: f4::stm32f40x,
+    device: stm32f429x,
 
     resources: {
         static CMD_BUFFER: Vec<u8, [u8; MAX_CMD_LEN]> = Vec::new();

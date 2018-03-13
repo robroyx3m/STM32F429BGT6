@@ -7,15 +7,17 @@
 extern crate cast;
 extern crate cortex_m;
 extern crate cortex_m_rtfm as rtfm;
-extern crate stm32_f429_bgt6 as f4;
+extern crate stm32_f429_bgt;
 
-use f4::Serial;
-use f4::led::{self, LED};
-use f4::prelude::*;
-use f4::serial::Event;
-use f4::time::Hertz;
+use stm32_f429_bgt6::Serial;
+use stm32_f429_bgt6::led::{self, LED};
+use stm32_f429_bgt6::prelude::*;
+use stm32_f429_bgt6::serial::Event;
+use stm32_f429_bgt6::time::Hertz;
 use cortex_m::peripheral::SystClkSource;
 use rtfm::{app, Threshold};
+
+use stm32_f429_bgt6::stm32f40x as stm32f429x; //VERY IMPORTANT! Always do this to clarify what the base device crate really is!
 
 // CONFIGURATION
 const BAUD_RATE: Hertz = Hertz(115_200);
@@ -23,7 +25,7 @@ const DIVISOR: u32 = 4;
 
 // TASKS & RESOURCES
 app! {
-    device: f4::stm32f40x,
+    device: stm32f429x,
 
     resources: {
         static ON: bool = false;

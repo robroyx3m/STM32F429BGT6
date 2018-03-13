@@ -13,14 +13,16 @@ extern crate cortex_m;
 #[macro_use]
 extern crate cortex_m_debug;
 extern crate cortex_m_rtfm as rtfm;
-extern crate stm32_f429_bgt6 as f4;
+extern crate stm32_f429_bgt6;
 
-use f4::adc::{Adc, AdcChannel};
-use f4::dma::{CircBuffer, Dma2Stream0};
-use f4::time::Hertz;
-use f4::{Channel, Pwm};
-use f4::led::{self, LED};
+use stm32_f429_bgt6::adc::{Adc, AdcChannel};
+use stm32_f429_bgt6::dma::{CircBuffer, Dma2Stream0};
+use stm32_f429_bgt6::time::Hertz;
+use stm32_f429_bgt6::{Channel, Pwm};
+use stm32_f429_bgt6::led::{self, LED};
 use rtfm::{app, Threshold};
+
+use stm32_f429_bgt6::stm32f40x as stm32f429x; //VERY IMPORTANT! Always do this to clarify what the base device crate really is!
 
 // FIXME: Sampling is twice as fast when connected to ITM by gdb???
 const FREQUENCY: Hertz = Hertz(8);
@@ -28,7 +30,7 @@ const FREQUENCY: Hertz = Hertz(8);
 const N: usize = 6;
 
 app! {
-    device: f4::stm32f40x,
+    device: stm32f429x,
 
     resources: {
         static BUFFER: CircBuffer<[u16; N], Dma2Stream0> = CircBuffer::new([[0; N]; 2]);

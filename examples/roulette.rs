@@ -7,19 +7,21 @@
 extern crate cast;
 extern crate cortex_m;
 extern crate cortex_m_rtfm as rtfm;
-extern crate stm32_f429_bgt6 as f4;
+extern crate stm32_f429_bgt6;
 
 use cast::{usize, u8};
 use cortex_m::peripheral::SystClkSource;
-use f4::leds::LEDS;
+use stm32_f429_bgt6::leds::LEDS;
 use rtfm::{app, Threshold};
+
+use stm32_f429_bgt6::stm32f40x as stm32f429x; //VERY IMPORTANT! Always do this to clarify what the base device crate really is!
 
 // CONFIGURATION
 const DIVISOR: u32 = 4;
 
 // TASKS & RESOURCES
 app! {
-    device: f4::stm32f40x,
+    device: stm32f429x,
 
     resources: {
         static STATE: u8 = 0;

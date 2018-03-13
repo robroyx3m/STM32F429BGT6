@@ -6,18 +6,20 @@
 
 extern crate cortex_m;
 extern crate cortex_m_rtfm as rtfm;
-extern crate stm32_f429_bgt6 as f4;
+extern crate stm32_f429_bgt6;
 
 use cortex_m::peripheral::SystClkSource;
-use f4::led::{self, LED};
+use stm32_f429_bgt6::led::{self, LED};
 use rtfm::{app, Threshold};
+
+use stm32_f429_bgt6::stm32f40x as stm32f429x; //VERY IMPORTANT! Always do this to clarify what the base device crate really is!
 
 // CONFIGURATION
 const FREQUENCY: u32 = 1; // Hz
 
 // TASKS & RESOURCES
 app! {
-    device: f4::stm32f40x,
+    device: stm32f429x,
 
     resources: {
         static ON: bool = false;

@@ -36,25 +36,27 @@ extern crate cortex_m;
 extern crate cortex_m_rtfm as rtfm;
 extern crate heapless;
 #[macro_use]
-extern crate stm32_f429_bgt6 as f4;
-extern crate stm32f429x as stm32f40x;
+extern crate stm32_f429_bgt6;
+extern crate stm32f429x;
 
 use cortex_m::peripheral::SystClkSource;
 use core::ops::Deref;
 use core::f32;
-use f4::lsm9ds1::{ImuSettings, Lsm9ds1};
-use f4::Serial;
-use f4::Spi;
-use f4::dma::{Buffer, Dma1Stream5, Dma1Stream6};
-use f4::time::Hertz;
-use f4::clock;
-use f4::timer::Timer;
-use f4::prelude::*;
-use f4::math_utils;
-use f4::math_utils::{Quaternion, Vector3};
-use f4::madgwick_ahrs::MadgwickAhrs;
-use f4::button::{self, BUTTON};
+use stm32_f429_bgt6::lsm9ds1::{ImuSettings, Lsm9ds1};
+use stm32_f429_bgt6::Serial;
+use stm32_f429_bgt6::Spi;
+use stm32_f429_bgt6::dma::{Buffer, Dma1Stream5, Dma1Stream6};
+use stm32_f429_bgt6::time::Hertz;
+use stm32_f429_bgt6::clock;
+use stm32_f429_bgt6::timer::Timer;
+use stm32_f429_bgt6::prelude::*;
+use stm32_f429_bgt6::math_utils;
+use stm32_f429_bgt6::math_utils::{Quaternion, Vector3};
+use stm32_f429_bgt6::madgwick_ahrs::MadgwickAhrs;
+use stm32_f429_bgt6::button::{self, BUTTON};
 use rtfm::{app, Threshold};
+
+use stm32_f429_bgt6::stm32f40x as stm32f429x; //VERY IMPORTANT! Always do this to clarify what the base device crate really is!
 
 const BAUD_RATE: Hertz = Hertz(115_200);
 const SAMPLE_FREQUENCY: u32 = 100;
@@ -74,7 +76,7 @@ pub enum OutputMode {
 }
 
 app! {
-    device: f4::stm32f40x,
+    device: stm32f429x,
 
     resources: {
         // Serial

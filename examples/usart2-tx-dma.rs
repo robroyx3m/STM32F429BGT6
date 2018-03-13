@@ -6,17 +6,19 @@
 #![no_std]
 
 extern crate cortex_m_rtfm as rtfm;
-extern crate stm32_f429_bgt6 as f4;
+extern crate stm32_f429_bgt6;
 
-use f4::Serial;
-use f4::dma::{Buffer, Dma1Stream6};
-use f4::time::Hertz;
+use stm32_f429_bgt6::Serial;
+use stm32_f429_bgt6::dma::{Buffer, Dma1Stream6};
+use stm32_f429_bgt6::time::Hertz;
 use rtfm::{app, Threshold};
+
+use stm32_f429_bgt6::stm32f40x as stm32f429x; //VERY IMPORTANT! Always do this to clarify what the base device crate really is!
 
 const BAUD_RATE: Hertz = Hertz(115_200);
 
 app! {
-    device: f4::stm32f40x,
+    device: stm32f429x,
 
     resources: {
         static BUFFER: Buffer<[u8; 15], Dma1Stream6> = Buffer::new([0; 15]);

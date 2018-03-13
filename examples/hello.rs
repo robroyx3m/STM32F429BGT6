@@ -6,12 +6,14 @@
 
 extern crate cortex_m_rtfm as rtfm;
 #[macro_use]
-extern crate stm32_f429_bgt6 as f4;
+extern crate stm32_f429_bgt6;
 
 use rtfm::app;
 
+use stm32_f429_bgt6::stm32f40x as stm32f429x; //VERY IMPORTANT! Always do this to clarify what the base device crate really is!
+
 app! {
-    device: f4::stm32f40x,
+    device: stm32f429x,
 }
 
 fn init(_p: init::Peripherals) {}

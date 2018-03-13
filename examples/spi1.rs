@@ -14,16 +14,18 @@
 
 extern crate cortex_m;
 extern crate cortex_m_rtfm as rtfm;
-extern crate stm32_f429_bgt6 as f4;
-extern crate stm32f429x as stm32f40x;
+extern crate stm32_f429_bgt6;
+extern crate stm32f429x;
 
-use f4::Spi;
-use f4::prelude::*;
+use stm32_f429_bgt6::Spi;
+use stm32_f429_bgt6::prelude::*;
 use rtfm::{app, Threshold};
-use stm32f40x::GPIOA;
+use stm32f429x::GPIOA;
+
+use stm32_f429_bgt6::stm32f40x as stm32f429x; //VERY IMPORTANT! Always do this to clarify what the base device crate really is!
 
 app! {
-    device: f4::stm32f40x,
+    device: stm32f429x,
 
     idle: {
         resources: [SPI3, GPIOA],

@@ -7,16 +7,18 @@
 extern crate cortex_m;
 extern crate cortex_m_debug;
 extern crate cortex_m_rtfm as rtfm;
-extern crate stm32_f429_bgt6 as f4;
-extern crate stm32f429x as stm32f40x;
+extern crate stm32_f429_bgt6;
+extern crate stm32f429x;
 
 use core::mem::transmute;
-use f4::I2c;
-use f4::led::{self, LED};
+use stm32_f429_bgt6::I2c;
+use stm32_f429_bgt6::led::{self, LED};
 use rtfm::{app, Threshold};
 use core::result::Result;
-use stm32f40x::I2C1;
-use f4::clock;
+use stm32f429x::I2C1;
+use stm32_f429_bgt6::clock;
+
+use stm32_f429_bgt6::stm32f40x as stm32f429x; //VERY IMPORTANT! Always do this to clarify what the base device crate really is!
 
 const EEPROM_PAGE_SIZE: usize = 32;
 const RX_BUFFER_SIZE: usize = core::mem::size_of::<u32>();
@@ -29,7 +31,7 @@ pub enum Error {
 }
 
 app! {
-    device: f4::stm32f40x,
+    device: stm32f429x,
 
     idle: {
         resources: [I2C1, ITM],

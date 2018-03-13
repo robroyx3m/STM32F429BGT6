@@ -5,25 +5,27 @@
 #![feature(proc_macro)]
 #![no_std]
 
-extern crate stm32_f429_bgt6 as f4;
-extern crate stm32f429x as stm32f40x;
+extern crate stm32_f429_bgt6;
+extern crate stm32f429x;
 
 extern crate cortex_m_rtfm as rtfm;
 
 extern crate nb;
 
-use f4::Timer;
-use f4::led::{self, LED};
-use f4::prelude::*;
-use f4::time::Hertz;
-use f4::clock;
+use stm32_f429_bgt6::Timer;
+use stm32_f429_bgt6::led::{self, LED};
+use stm32_f429_bgt6::prelude::*;
+use stm32_f429_bgt6::time::Hertz;
+use stm32_f429_bgt6::clock;
 use rtfm::{app, Threshold};
+
+use stm32_f429_bgt6::stm32f40x as stm32f429x; //VERY IMPORTANT! Always do this to clarify what the base device crate really is!
 
 const FREQUENCY1: Hertz = Hertz(10);
 const FREQUENCY2: Hertz = Hertz(6);
 
 app! {
-    device: f4::stm32f40x,
+    device: stm32f429x,
 
     tasks: {
         TIM2: {
