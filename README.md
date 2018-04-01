@@ -25,6 +25,9 @@ for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
 dual licensed as above, without any additional terms or conditions.
 
 ### References
+
+[STM32F429 Datasheet](http://www.st.com/content/ccc/resource/technical/document/reference_manual/3d/6d/5a/66/b4/99/40/d4/DM00031020.pdf/files/DM00031020.pdf/jcr:content/translations/en.DM00031020.pdf)
+
 ![Nucleo F411RE pins](docs/Nucleo_f411re.png)
 
 ![Nucleo F411RE morpho pins](docs/Nucleo_f411re_morpho.png)
