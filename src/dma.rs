@@ -49,6 +49,15 @@ pub struct Dma2Stream0 {
     _0: (),
 }
 
+/// Stream 2 of DMA2
+pub struct Dma2Stream1 {
+    _0: (),
+}
+
+/// Stream 2 of DMA2
+pub struct Dma2Stream6 {
+    _0: (),
+}
 /// Buffer to be used with a certain DMA `STREAM`
 // NOTE(packed) workaround for rust-lang/rust#41315
 #[repr(packed)]
@@ -320,6 +329,51 @@ impl<T> Buffer<T, Dma2Stream0> {
         }
     }
 }
+/*
+impl<T> Buffer<T, Dma2Stream1> {
+    /// Waits until the DMA releases this buffer
+    pub fn release(&self, dma2: &DMA2) -> nb::Result<(), Error> {
+        let state = self.state.get();
+
+        if state == State::Unlocked {
+            return Ok(());
+        }
+
+        if dma2.lisr.read().teif1().bit_is_set() {
+            Err(nb::Error::Other(Error::Transfer))
+        } else if dma2.lisr.read().tcif1().bit_is_set() {
+            unsafe { self.unlock(state) }
+            dma2.lifcr.write(|w| w.ctcif1().set_bit());
+            dma2.s2cr.modify(|_, w| w.en().clear_bit());
+            Ok(())
+        } else {
+            Err(nb::Error::WouldBlock)
+        }
+    }
+}
+
+impl<T> Buffer<T, Dma2Stream6> {
+    /// Waits until the DMA releases this buffer
+    pub fn release(&self, dma2: &DMA2) -> nb::Result<(), Error> {
+        let state = self.state.get();
+
+        if state == State::Unlocked {
+            return Ok(());
+        }
+
+        if dma2.lisr.read().teif6().bit_is_set() {
+            Err(nb::Error::Other(Error::Transfer))
+        } else if dma2.lisr.read().tcif6().bit_is_set() {
+            unsafe { self.unlock(state) }
+            dma2.lifcr.write(|w| w.ctcif6().set_bit());
+            dma2.s2cr.modify(|_, w| w.en().clear_bit());
+            Ok(())
+        } else {
+            Err(nb::Error::WouldBlock)
+        }
+    }
+}
+*/
 
 /// A circular buffer associated to a DMA `STREAM`
 pub struct CircBuffer<B, STREAM> {
@@ -472,3 +526,62 @@ impl<B> CircBuffer<B, Dma2Stream0> {
         }
     }
 }
+/*
+//FIXME!
+impl<B> CircBuffer<B, Dma2Stream2> {
+    /// Yields read access to the half of the circular buffer that's not
+    /// currently being mutated by the DMA
+    pub fn read<R, F>(&self, dma2: &DMA2, f: F) -> nb::Result<R, Error>
+    where
+        F: FnOnce(&B) -> R,
+    {
+        let state = self.state.get();
+
+        assert_ne!(state, CircState::Free);
+
+        let isr = dma2.lisr.read();
+
+        if isr.teif0().bit_is_set() {
+            Err(nb::Error::Other(Error::Transfer))
+        } else {
+            match state {
+                CircState::MutatingFirstHalf => if isr.tcif0().bit_is_set() {
+                    Err(nb::Error::Other(Error::Overrun))
+                } else if isr.htif0().bit_is_set() {
+                    dma2.lifcr.write(|w| w.chtif0().set_bit());
+
+                    self.state.set(CircState::MutatingSecondHalf);
+
+                    let ret = f(unsafe { &(*self.buffer.get())[0] });
+
+                    if isr.tcif0().bit_is_set() {
+                        Err(nb::Error::Other(Error::Overrun))
+                    } else {
+                        Ok(ret)
+                    }
+                } else {
+                    Err(nb::Error::WouldBlock)
+                },
+                CircState::MutatingSecondHalf => if isr.htif0().bit_is_set() {
+                    Err(nb::Error::Other(Error::Overrun))
+                } else if isr.tcif0().bit_is_set() {
+                    dma2.lifcr.write(|w| w.ctcif0().set_bit());
+
+                    self.state.set(CircState::MutatingFirstHalf);
+
+                    let ret = f(unsafe { &(*self.buffer.get())[1] });
+
+                    if isr.htif0().bit_is_set() {
+                        Err(nb::Error::Other(Error::Overrun))
+                    } else {
+                        Ok(ret)
+                    }
+                } else {
+                    Err(nb::Error::WouldBlock)
+                },
+                _ => unreachable!(),
+            }
+        }
+    }
+}
+*/

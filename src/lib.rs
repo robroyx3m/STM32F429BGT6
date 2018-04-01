@@ -30,6 +30,7 @@ pub mod math_utils;
 pub mod dma;
 pub mod led;
 pub mod button;
+pub mod buttons;
 pub mod leds;
 pub mod serial;
 pub mod timer;
@@ -47,7 +48,7 @@ pub mod i2c;
 
 use frequency::*;
 
-pub use adc::{Adc, AdcChannel};
+pub use adc::{Adc1, Adc2, AdcChannel};
 pub use capture::Capture;
 pub use hal::prelude;
 pub use i2c::I2c;
